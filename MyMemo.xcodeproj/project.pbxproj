@@ -30,6 +30,9 @@
 		1B913B8928378394007C1CE3 /* MemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B913B8728378394007C1CE3 /* MemoTableViewCell.xib */; };
 		1B913B8B28378519007C1CE3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8A28378519007C1CE3 /* CustomCell.swift */; };
 		1B913B8E283785BC007C1CE3 /* Date+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8D283785BC007C1CE3 /* Date+Extentions.swift */; };
+		1B913B902837A2E8007C1CE3 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8F2837A2E8007C1CE3 /* RealmRepository.swift */; };
+		1B913B922837A375007C1CE3 /* MemoRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B912837A375007C1CE3 /* MemoRealmManager.swift */; };
+		1B913B952837A816007C1CE3 /* MemoEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B942837A816007C1CE3 /* MemoEnums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		1B913B8728378394007C1CE3 /* MemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoTableViewCell.xib; sourceTree = "<group>"; };
 		1B913B8A28378519007C1CE3 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		1B913B8D283785BC007C1CE3 /* Date+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extentions.swift"; sourceTree = "<group>"; };
+		1B913B8F2837A2E8007C1CE3 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
+		1B913B912837A375007C1CE3 /* MemoRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRealmManager.swift; sourceTree = "<group>"; };
+		1B913B942837A816007C1CE3 /* MemoEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEnums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,7 @@
 		1B6542A4283772B800DD2350 /* MyMemo */ = {
 			isa = PBXGroup;
 			children = (
+				1B913B932837A7FD007C1CE3 /* Enums */,
 				1B913B8C2837859F007C1CE3 /* Extention */,
 				1B913B7E28377906007C1CE3 /* DB */,
 				1B6542C72837752B00DD2350 /* Consts */,
@@ -142,6 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				1B913B7F28377913007C1CE3 /* RealmModel.swift */,
+				1B913B8F2837A2E8007C1CE3 /* RealmRepository.swift */,
+				1B913B912837A375007C1CE3 /* MemoRealmManager.swift */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -161,6 +170,14 @@
 				1B913B8D283785BC007C1CE3 /* Date+Extentions.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		1B913B932837A7FD007C1CE3 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				1B913B942837A816007C1CE3 /* MemoEnums.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,12 +268,15 @@
 				1B913B8428377D09007C1CE3 /* Storyboard.swift in Sources */,
 				1B6542AA283772B800DD2350 /* MainViewController.swift in Sources */,
 				1B6542C6283774D800DD2350 /* FirstScreenViewController.swift in Sources */,
+				1B913B902837A2E8007C1CE3 /* RealmRepository.swift in Sources */,
 				1B6542A6283772B800DD2350 /* AppDelegate.swift in Sources */,
 				1B913B8028377913007C1CE3 /* RealmModel.swift in Sources */,
 				1B6542A8283772B800DD2350 /* SceneDelegate.swift in Sources */,
 				1B913B8828378394007C1CE3 /* MemoTableViewCell.swift in Sources */,
 				1B913B8228377BAC007C1CE3 /* UserDefaults.swift in Sources */,
+				1B913B922837A375007C1CE3 /* MemoRealmManager.swift in Sources */,
 				1B6542C92837753500DD2350 /* Const.swift in Sources */,
+				1B913B952837A816007C1CE3 /* MemoEnums.swift in Sources */,
 				1B913B7D283777E5007C1CE3 /* UserDefaultsManager.swift in Sources */,
 				1B913B8E283785BC007C1CE3 /* Date+Extentions.swift in Sources */,
 				1B6542CF283776B000DD2350 /* ContentViewController.swift in Sources */,

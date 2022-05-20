@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,14 +17,53 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZLi-Yy-KyX">
+                                <rect key="frame" x="0.0" y="140" width="414" height="672"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="Mrc-Zx-ifB">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NsM-ZY-RCR"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tFw-ic-OEL"/>
+                                    <barButtonItem title="Item" id="RZ6-uO-Uig">
+                                        <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large"/>
+                                        <color key="tintColor" systemColor="systemOrangeColor"/>
+                                        <connections>
+                                            <action selector="writeBarButtonItemClicked:" destination="BYZ-38-t0r" id="xWM-Sq-N2L"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <toolbarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </toolbarAppearance>
+                            </toolbar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Mrc-Zx-ifB" firstAttribute="top" secondItem="ZLi-Yy-KyX" secondAttribute="bottom" id="0aA-Hm-nqR"/>
+                            <constraint firstItem="Mrc-Zx-ifB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="5YS-qh-hb9"/>
+                            <constraint firstItem="Mrc-Zx-ifB" firstAttribute="top" secondItem="ZLi-Yy-KyX" secondAttribute="bottom" id="Ees-Sr-hlA"/>
+                            <constraint firstItem="ZLi-Yy-KyX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GWo-kh-iXx"/>
+                            <constraint firstItem="Mrc-Zx-ifB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="kUQ-M7-hP1"/>
+                            <constraint firstItem="ZLi-Yy-KyX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ltY-cy-J2S"/>
+                            <constraint firstItem="Mrc-Zx-ifB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mhy-bu-XDj"/>
+                            <constraint firstItem="ZLi-Yy-KyX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="q0d-0j-KhG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2QL-07-ewB"/>
+                    <connections>
+                        <outlet property="memoTableView" destination="ZLi-Yy-KyX" id="z41-LW-ImB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="320" y="138"/>
+            <point key="canvasLocation" x="318.84057971014494" y="137.94642857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="R8K-Ie-507">
@@ -43,8 +83,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
