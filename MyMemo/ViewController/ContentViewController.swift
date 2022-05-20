@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ContentViewController.swift
 //  MyMemo
 //
 //  Created by bro on 2022/05/20.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ContentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
-
-
+    
 }
-

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--First Screen View Controller-->
+        <scene sceneID="D5g-OY-Yg3">
+            <objects>
+                <viewController storyboardIdentifier="FirstScreenViewController" id="wos-ep-yOb" customClass="FirstScreenViewController" customModule="MyMemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WPF-d9-OgI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAx-1r-Ije">
+                                <rect key="frame" x="72.5" y="327" width="269" height="242"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTM-Dy-RLQ">
+                                        <rect key="frame" x="15" y="12" width="239" height="150"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clz-85-eKz">
+                                        <rect key="frame" x="15" y="172" width="239" height="55"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="Oqs-aX-FrD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="okButtonClicked:" destination="wos-ep-yOb" eventType="touchUpInside" id="jj1-Jd-GqZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="clz-85-eKz" firstAttribute="leading" secondItem="NAx-1r-Ije" secondAttribute="leading" constant="15" id="2lq-E1-17U"/>
+                                    <constraint firstItem="gTM-Dy-RLQ" firstAttribute="leading" secondItem="NAx-1r-Ije" secondAttribute="leading" constant="15" id="P05-dp-Fdt"/>
+                                    <constraint firstItem="gTM-Dy-RLQ" firstAttribute="top" secondItem="NAx-1r-Ije" secondAttribute="top" constant="12" id="RvC-Lh-7QS"/>
+                                    <constraint firstAttribute="width" secondItem="NAx-1r-Ije" secondAttribute="height" multiplier="1:0.9" id="Vah-Z8-tcI"/>
+                                    <constraint firstAttribute="trailing" secondItem="gTM-Dy-RLQ" secondAttribute="trailing" constant="15" id="XMn-u8-3hP"/>
+                                    <constraint firstAttribute="trailing" secondItem="clz-85-eKz" secondAttribute="trailing" constant="15" id="loq-Ud-bxB"/>
+                                    <constraint firstAttribute="bottom" secondItem="clz-85-eKz" secondAttribute="bottom" constant="15" id="qzB-Nw-JK9"/>
+                                    <constraint firstItem="clz-85-eKz" firstAttribute="top" secondItem="gTM-Dy-RLQ" secondAttribute="bottom" constant="10" id="z1k-oc-pcs"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3eB-3w-c4C"/>
+                        <color key="backgroundColor" red="0.47151199490000001" green="0.47151199490000001" blue="0.47151199490000001" alpha="0.37264590231788081" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NAx-1r-Ije" firstAttribute="centerX" secondItem="WPF-d9-OgI" secondAttribute="centerX" id="auW-sY-mIk"/>
+                            <constraint firstItem="NAx-1r-Ije" firstAttribute="width" secondItem="WPF-d9-OgI" secondAttribute="width" multiplier="0.65" id="edu-k9-x9I"/>
+                            <constraint firstItem="NAx-1r-Ije" firstAttribute="centerY" secondItem="WPF-d9-OgI" secondAttribute="centerY" id="l1e-57-Toj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="NAx-1r-Ije" id="KKv-1W-LCB"/>
+                        <outlet property="okButton" destination="clz-85-eKz" id="kwu-HC-KAG"/>
+                        <outlet property="titleLabel" destination="gTM-Dy-RLQ" id="0ZF-Gt-Ucb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bfy-eb-J8k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="164" y="13"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
