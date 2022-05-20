@@ -26,6 +26,10 @@
 		1B913B8028377913007C1CE3 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B7F28377913007C1CE3 /* RealmModel.swift */; };
 		1B913B8228377BAC007C1CE3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8128377BAC007C1CE3 /* UserDefaults.swift */; };
 		1B913B8428377D09007C1CE3 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8328377D09007C1CE3 /* Storyboard.swift */; };
+		1B913B8828378394007C1CE3 /* MemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8628378394007C1CE3 /* MemoTableViewCell.swift */; };
+		1B913B8928378394007C1CE3 /* MemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B913B8728378394007C1CE3 /* MemoTableViewCell.xib */; };
+		1B913B8B28378519007C1CE3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8A28378519007C1CE3 /* CustomCell.swift */; };
+		1B913B8E283785BC007C1CE3 /* Date+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8D283785BC007C1CE3 /* Date+Extentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,10 @@
 		1B913B7F28377913007C1CE3 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		1B913B8128377BAC007C1CE3 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		1B913B8328377D09007C1CE3 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		1B913B8628378394007C1CE3 /* MemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTableViewCell.swift; sourceTree = "<group>"; };
+		1B913B8728378394007C1CE3 /* MemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoTableViewCell.xib; sourceTree = "<group>"; };
+		1B913B8A28378519007C1CE3 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		1B913B8D283785BC007C1CE3 /* Date+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extentions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +90,11 @@
 		1B6542A4283772B800DD2350 /* MyMemo */ = {
 			isa = PBXGroup;
 			children = (
+				1B913B8C2837859F007C1CE3 /* Extention */,
 				1B913B7E28377906007C1CE3 /* DB */,
 				1B6542C72837752B00DD2350 /* Consts */,
 				1B6542C4283774BA00DD2350 /* ViewController */,
+				1B913B8528378368007C1CE3 /* CustomCell */,
 				1B6542C1283773D300DD2350 /* Storyboard */,
 				1B6542A5283772B800DD2350 /* AppDelegate.swift */,
 				1B913B7C283777E5007C1CE3 /* UserDefaultsManager.swift */,
@@ -123,6 +133,7 @@
 				1B6542CA2837754500DD2350 /* ViewController.swift */,
 				1B913B8128377BAC007C1CE3 /* UserDefaults.swift */,
 				1B913B8328377D09007C1CE3 /* Storyboard.swift */,
+				1B913B8A28378519007C1CE3 /* CustomCell.swift */,
 			);
 			path = Consts;
 			sourceTree = "<group>";
@@ -133,6 +144,23 @@
 				1B913B7F28377913007C1CE3 /* RealmModel.swift */,
 			);
 			path = DB;
+			sourceTree = "<group>";
+		};
+		1B913B8528378368007C1CE3 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				1B913B8628378394007C1CE3 /* MemoTableViewCell.swift */,
+				1B913B8728378394007C1CE3 /* MemoTableViewCell.xib */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		1B913B8C2837859F007C1CE3 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				1B913B8D283785BC007C1CE3 /* Date+Extentions.swift */,
+			);
+			path = Extention;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +233,7 @@
 				1B6542B2283772BB00DD2350 /* LaunchScreen.storyboard in Resources */,
 				1B6542C3283773EF00DD2350 /* FirstScreen.storyboard in Resources */,
 				1B6542AF283772BB00DD2350 /* Assets.xcassets in Resources */,
+				1B913B8928378394007C1CE3 /* MemoTableViewCell.xib in Resources */,
 				1B6542AD283772B800DD2350 /* Main.storyboard in Resources */,
 				1B6542CD2837769100DD2350 /* Content.storyboard in Resources */,
 			);
@@ -218,15 +247,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B6542CB2837754500DD2350 /* ViewController.swift in Sources */,
+				1B913B8B28378519007C1CE3 /* CustomCell.swift in Sources */,
 				1B913B8428377D09007C1CE3 /* Storyboard.swift in Sources */,
 				1B6542AA283772B800DD2350 /* MainViewController.swift in Sources */,
 				1B6542C6283774D800DD2350 /* FirstScreenViewController.swift in Sources */,
 				1B6542A6283772B800DD2350 /* AppDelegate.swift in Sources */,
 				1B913B8028377913007C1CE3 /* RealmModel.swift in Sources */,
 				1B6542A8283772B800DD2350 /* SceneDelegate.swift in Sources */,
+				1B913B8828378394007C1CE3 /* MemoTableViewCell.swift in Sources */,
 				1B913B8228377BAC007C1CE3 /* UserDefaults.swift in Sources */,
 				1B6542C92837753500DD2350 /* Const.swift in Sources */,
 				1B913B7D283777E5007C1CE3 /* UserDefaultsManager.swift in Sources */,
+				1B913B8E283785BC007C1CE3 /* Date+Extentions.swift in Sources */,
 				1B6542CF283776B000DD2350 /* ContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

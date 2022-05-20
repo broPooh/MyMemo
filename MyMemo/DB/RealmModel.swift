@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class MemoList: Object {
+class Memo: Object {
     
     @Persisted var title: String
     @Persisted var writeAt: Date
