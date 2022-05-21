@@ -82,7 +82,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Const.CustomCell.MemoTableViewCell, for: indexPath) as? MemoTableViewCell else { return UITableViewCell() }
         
         let memo = searchResult[indexPath.row]
+        
+        //NSMutableAttributedString으로 부분적 색상변경 적용하기
+        let titleAttributedString = NSMutableAttributedString(string: memo.title)
+        let contentAttributedString = NSMutableAttributedString(string: memo.content)
+        
+        titleAttributedString.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (memo.title as NSString).range(of: searchText))
+        contentAttributedString.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (memo.content as NSString).range(of: searchText))
+        
         cell.configure(memo: memo)
+        cell.titleLabel.attributedText = titleAttributedString
+        cell.contentLabel.attributedText = contentAttributedString
+        cell.selectionStyle = .none
 
         return cell
     }
@@ -95,6 +106,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Const.CustomCell.MemoHeaderTableView) as? MemoHeaderTableView else { return UITableViewHeaderFooterView() }
         header.titleLabel.text = "\(searchResult.count)개 찾음"
         return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 48
     }
     
     
