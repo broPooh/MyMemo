@@ -39,7 +39,8 @@ class ContentViewController: UIViewController {
     func initData() {
         if mode == ContentMode.edit {
             finishButton.title = "수정"
-            memoTextView.text = "\(memo?.title) /n \(memo?.content)"
+            guard let memoResult = memo else { return }
+            memoTextView.text = memoResult.title + "\n" + memoResult.content
             
         } else {
             finishButton.title = "완료"

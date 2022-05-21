@@ -220,6 +220,21 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    //클릭시 수정화면 전환
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //let sb = UIStoryboard(name: "Content", bundle: nil)
+        //let vc = sb.instantiateViewController(withIdentifier: "MemoViewController") as! MemoViewController
+        let sb = UIStoryboard(name: "Content", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
+            print("instantiateViewController not Found")
+            return
+        }
+    
+        vc.memo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
+        vc.mode = ContentMode.edit
+        self.navigationController?.pushViewController(vc, animated: true )
+    }
+    
 }
 
 
