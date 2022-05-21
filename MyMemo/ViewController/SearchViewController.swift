@@ -177,6 +177,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     //클릭시 수정화면 전환
+    // 클릭은 한거 같은데 왜 화면 전환이 안되지.?
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Content", bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
@@ -189,9 +190,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             title: "검색", style: .plain, target: nil, action: nil)
         vc.memo = searchResult[indexPath.row]
         vc.mode = ContentMode.edit
+        //vc.modalPresentationStyle = .fullScreen
+        //present(vc, animated: true, completion: nil)
         self.navigationController?.pushViewController(vc, animated: true )
     }
-    
     
 }
 

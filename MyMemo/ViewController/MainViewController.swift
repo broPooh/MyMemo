@@ -50,13 +50,15 @@ class MainViewController: UIViewController {
             return
         }
         resultVC.searchDelegate = self
-        
-        let searchController = UISearchController(searchResultsController: resultVC)
-        
+        let navResultVC = UINavigationController(rootViewController:  resultVC)
+
+        let searchController = UISearchController(searchResultsController: navResultVC)
         //searchResultsUpdater를 SearchViewController에서 하도록 위임
         searchController.searchResultsUpdater = resultVC
         searchController.searchBar.placeholder = "검색"
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
+        self.definesPresentationContext = true
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false //스크롤시 서치바 사라지지 않도록 설정
