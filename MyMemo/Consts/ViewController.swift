@@ -13,5 +13,6 @@ extension Const {
         static let FirstScreenViewController = "FirstScreenViewController"
         static let MainViewController = "MainViewController"
         static let ContentViewController = "ContentViewController"
+        static let SearchViewController = "SearchViewController"
     }
 }

@@ -69,4 +69,10 @@ final class MemoRealmManager: RealmRepository {
 //        return pinMemoList
     }
     
+    func searchMemoData(searchText: String) -> Results<Memo> {
+        return localRealm.objects(Memo.self).where({
+            $0.title.contains(searchText) || $0.content.contains(searchText)
+        })
+    }
+    
 }

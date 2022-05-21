@@ -42,14 +42,20 @@ class MainViewController: UIViewController {
     }
     
     func initSearchBar() {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
+        
+        guard let resultVC = storyboard?.instantiateViewController(withIdentifier: Const.ViewController.SearchViewController) as? SearchViewController else {
+            print("test")
+            return
+        }
+        
+        let searchController = UISearchController(searchResultsController: resultVC)
+        
+        //searchResultsUpdater를 SearchViewController에서 하도록 위임
+        searchController.searchResultsUpdater = resultVC
         searchController.searchBar.placeholder = "검색"
+        searchController.hidesNavigationBarDuringPresentation = false
         
         self.navigationItem.searchController = searchController
-        self.title = "0개의 메모"
-        
         self.navigationItem.hidesSearchBarWhenScrolling = false //스크롤시 서치바 사라지지 않도록 설정
         self.navigationController?.navigationBar.prefersLargeTitles = true // Large title
     }
@@ -85,7 +91,6 @@ class MainViewController: UIViewController {
         //XIB 파일 연결
         let nibName = UINib(nibName: Const.CustomCell.MemoHeaderTableView, bundle: nil)
         memoTableView.register(nibName, forHeaderFooterViewReuseIdentifier: Const.CustomCell.MemoHeaderTableView)
-        //memoTableView.register(nibName, forCellReuseIdentifier: Const.CustomCell.MemoHeaderView)
     }
     
     func setTitleMemoCount() {
@@ -115,6 +120,8 @@ class MainViewController: UIViewController {
     
         vc.memo = nil
         vc.mode = ContentMode.write
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "메모", style: .plain, target: nil, action: nil)
         self.navigationController?.pushViewController(vc, animated: true )
     }
     
@@ -218,8 +225,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
     //클릭시 수정화면 전환
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let sb = UIStoryboard(name: "Content", bundle: nil)
-        //let vc = sb.instantiateViewController(withIdentifier: "MemoViewController") as! MemoViewController
         let sb = UIStoryboard(name: "Content", bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
             print("instantiateViewController not Found")
@@ -233,19 +238,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         vc.mode = ContentMode.edit
         self.navigationController?.pushViewController(vc, animated: true )
     }
-    
-}
-
-
-// MARK: - UISearchResultsUpdating Delegate
-extension MainViewController: UISearchResultsUpdating {
-    
-    
-  
-  func updateSearchResults(for searchController: UISearchController) {
-    
-      guard let searchText = searchController.searchBar.text else { return }
-            print(searchText)
-  }
     
 }
