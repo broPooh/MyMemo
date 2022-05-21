@@ -15,14 +15,9 @@ final class MemoRealmManager: RealmRepository {
     private init() {  }
 
     func loadDatas() -> Results<Memo> {
-        return localRealm.objects(Memo.self)
+        return localRealm.objects(Memo.self).sorted(byKeyPath: "writeAt", ascending: false)
     }
-    
-    func loadTwoDatas() -> (Results<Memo>, Results<Memo>) {
-        let results = localRealm.objects(Memo.self)
-        return (results, results.filter("isPin == true"))
-    }
-    
+        
     func saveData(item: Memo) {
         try! localRealm.write {
             localRealm.add(item)
@@ -43,6 +38,14 @@ final class MemoRealmManager: RealmRepository {
                 updateItem.isPin = item.isPin
                 updateItem.writeAt = item.writeAt
             }
+        }
+    }
+    
+    func updateData(item: Memo, title: String, content: String, writeAt: Date) {
+        try! localRealm.write {
+            item.title = item.title
+            item.content = item.content
+            item.writeAt = item.writeAt
         }
     }
     

@@ -226,6 +226,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
     
+        //메모 수정 화면 변경시 백아이템 타이틀변경
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "메모", style: .plain, target: nil, action: nil)
         vc.memo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
         vc.mode = ContentMode.edit
         self.navigationController?.pushViewController(vc, animated: true )
