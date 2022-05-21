@@ -111,7 +111,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(memo: memo)
         cell.titleLabel.attributedText = titleAttributedString
         cell.contentLabel.attributedText = contentAttributedString
-        cell.selectionStyle = .none
 
         return cell
     }
@@ -139,9 +138,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         let updateMemo = searchResult[indexPath.row]
         let pinAction = UIContextualAction(style: .normal, title: "pin") { action, view, completionHaldler in
-
                         
-            if !updateMemo.isPin == false && self.totalPinMemo.count >= 5 {
+            if !updateMemo.isPin && self.totalPinMemo.count >= 5 {
                 self.view.makeToast("고정은 5개까지만 가능합니다!")
                 completionHaldler(true)
                 return
