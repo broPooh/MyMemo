@@ -77,7 +77,9 @@ class ContentViewController: UIViewController {
         let memoContent = memoString.count > 1 ? String(memoString[1]) : ""
         let writeAt = Date()
         
+        
         if mode == ContentMode.write {
+            memo = Memo(title: memoTitle, content: memoContent, writeAt: writeAt)
             checkInputMemo(title: memoTitle, content: memoContent) ? MemoRealmManager.shared.saveData(item: memo!) : print("데이터 없음"); return
         } else {
             checkInputMemo(title: memoTitle, content: memoContent) ? MemoRealmManager.shared.updateData(item: memo!, title: memoTitle, content: memoContent, writeAt: writeAt) : MemoRealmManager.shared.deleteData(item: memo!)

@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //작성후 복귀하면서 전체 데이터 리로드
+        print("Main viewWillAppear")
         loadMemoData()
     }
     
@@ -47,6 +48,7 @@ class MainViewController: UIViewController {
             print("test")
             return
         }
+        resultVC.searchDelegate = self
         
         let searchController = UISearchController(searchResultsController: resultVC)
         
@@ -237,6 +239,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         vc.memo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
         vc.mode = ContentMode.edit
         self.navigationController?.pushViewController(vc, animated: true )
+    }
+    
+}
+
+extension MainViewController: SearchReloadDelgate {
+
+    func reloadTableView() {
+        self.loadMemoData()
     }
     
 }

@@ -8,9 +8,15 @@
 import UIKit
 import RealmSwift
 
+protocol SearchReloadDelgate {
+    func reloadTableView()
+}
+
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchTableView: UITableView!
     var searchText: String = ""
+    
+    var searchDelegate: SearchReloadDelgate?
     
     var totalPinMemo: Results<Memo>!
     var searchResult: Results<Memo>! {
@@ -27,6 +33,17 @@ class SearchViewController: UIViewController {
         tableViewConfig()
         searchBarConfig()
         loadData(search: "")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("Search viewWillAppear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("Search viewWillDIsAppear")
+        searchDelegate?.reloadTableView()
     }
     
     func tableViewConfig() {
@@ -148,6 +165,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             let ok = UIAlertAction(title: "확인", style: .default) { _ in
                 MemoRealmManager.shared.deleteData(item: deleteMemo)
                 self.loadData(search: self.searchText)
+                self.searchDelegate?.reloadTableView()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             self.presentAlert(title: "삭제하시겠습니까?", message: "", alertActions: ok, cancel)
