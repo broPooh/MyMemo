@@ -27,6 +27,7 @@
 		1B833D102838A335009015A0 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 1B833D0F2838A335009015A0 /* Toast */; };
 		1B833D122838A867009015A0 /* ViewController+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B833D112838A867009015A0 /* ViewController+Extentions.swift */; };
 		1B833D152838CAB1009015A0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B833D132838CAB1009015A0 /* SearchViewController.swift */; };
+		1B833D1828394A16009015A0 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B833D1728394A16009015A0 /* Search.storyboard */; };
 		1B913B7D283777E5007C1CE3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B7C283777E5007C1CE3 /* UserDefaultsManager.swift */; };
 		1B913B8028377913007C1CE3 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B7F28377913007C1CE3 /* RealmModel.swift */; };
 		1B913B8228377BAC007C1CE3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8128377BAC007C1CE3 /* UserDefaults.swift */; };
@@ -59,6 +60,7 @@
 		1B833D0528387EBE009015A0 /* MemoHeaderTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoHeaderTableView.xib; sourceTree = "<group>"; };
 		1B833D112838A867009015A0 /* ViewController+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extentions.swift"; sourceTree = "<group>"; };
 		1B833D132838CAB1009015A0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		1B833D1728394A16009015A0 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		1B913B7C283777E5007C1CE3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		1B913B7F28377913007C1CE3 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		1B913B8128377BAC007C1CE3 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				1B6542C2283773EF00DD2350 /* FirstScreen.storyboard */,
 				1B6542CC2837769100DD2350 /* Content.storyboard */,
 				1B6542AB283772B800DD2350 /* Main.storyboard */,
+				1B833D1728394A16009015A0 /* Search.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				1B6542AF283772BB00DD2350 /* Assets.xcassets in Resources */,
 				1B913B8928378394007C1CE3 /* MemoTableViewCell.xib in Resources */,
 				1B6542AD283772B800DD2350 /* Main.storyboard in Resources */,
+				1B833D1828394A16009015A0 /* Search.storyboard in Resources */,
 				1B6542CD2837769100DD2350 /* Content.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

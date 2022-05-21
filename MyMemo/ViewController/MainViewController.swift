@@ -44,7 +44,8 @@ class MainViewController: UIViewController {
     
     func initSearchBar() {
         
-        guard let resultVC = storyboard?.instantiateViewController(withIdentifier: Const.ViewController.SearchViewController) as? SearchViewController else {
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        guard let resultVC = sb.instantiateViewController(withIdentifier: Const.ViewController.SearchViewController) as? SearchViewController else {
             print("test")
             return
         }
