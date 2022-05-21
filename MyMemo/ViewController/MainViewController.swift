@@ -13,12 +13,7 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var memoTableView: UITableView!
     
-    var memoList: Results<Memo>! {
-        didSet {
-            memoTableView.reloadData()
-        }
-    }
-    
+    var memoList: Results<Memo>!
     var pinList: Results<Memo>! {
         didSet {
             memoTableView.reloadData()
@@ -92,7 +87,7 @@ class MainViewController: UIViewController {
     }
     
     func setTitleMemoCount() {
-        self.title = "\(numberFormatting(number: memoList.count))개의 메모"
+        self.title = "\(numberFormatting(number: memoList.count + pinList.count))개의 메모"
     }
     
     func numberFormatting(number: Int) -> String {
@@ -103,8 +98,9 @@ class MainViewController: UIViewController {
     
     // MARK: - Data Handeling
     func loadMemoData() {
-        memoList = MemoRealmManager.shared.loadDatas()
-        pinList = MemoRealmManager.shared.searchPinDatas()
+        let results = MemoRealmManager.shared.loadDatas()
+        memoList = results.filter("isPin == false")
+        pinList = results.filter("isPin == true")
         setTitleMemoCount()
     }
 
@@ -133,25 +129,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         //memoList.count는 Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value가 발생하지 않는데
         //pinList.count는 왜 Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value가 발생하지..
-        //return section == MemoSection.normal.rawValue ? memoList.filter("isPin == true").count : memoList.count
+        //didSet에서 TableView를 리로드해주었었는데 이 부분에서 에러가 발생한것 같다. -> 정확하게 물어보기.
         
-        //return section == MemoSection.pin.rawValue ? (pinList.count <= 5 ? pinList.count : 5) : memoList.count
-        //return section == MemoSection.normal.rawValue ? pinList.count : memoList.count
-        return section == MemoSection.pin.rawValue ? memoList.filter("isPin == true").count : memoList.count
-        //return section == MemoSection.normal.rawValue ? memoList.count : memoList.count
+        //return section == MemoSection.pin.rawValue ? pinList.count : memoList.count
+        return section == MemoSection.pin.rawValue ? (pinList.count <= 5 ? pinList.count : 5) : memoList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Const.CustomCell.MemoTableViewCell, for: indexPath) as? MemoTableViewCell else { return UITableViewCell() }
         
-        if indexPath.section == MemoSection.pin.rawValue && pinList.count > 0 {
-            
-            let memo = pinList[indexPath.row]
-            cell.configure(memo: memo)
-        } else if indexPath.section == MemoSection.normal.rawValue && memoList.count > 0 {
-            let memo = memoList[indexPath.row]
-            cell.configure(memo: memo)
-        }
+        let memo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
+        cell.configure(memo: memo)
+//        if indexPath.section == MemoSection.pin.rawValue && pinList.count > 0 {
+//            cell.configure(memo: memo)
+//        } else if indexPath.section == MemoSection.normal.rawValue && memoList.count > 0 {
+//            cell.configure(memo: memo)
+//        }
         return cell
     }
     
@@ -159,24 +152,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return 90
     }
     
-    func headerVisible(header: UITableViewHeaderFooterView, visibility: UIView.Visibility) {
-        header.visibility = visibility
-    }
-    
     //커스텀 섹션 추가후 서치바가 처음 앱을 실행시 나타나지 않다가 스크롤시 나타나는 현상이 생김
     //에러를 잡아야 하는 상황임.
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Const.CustomCell.MemoHeaderTableView) as? MemoHeaderTableView else { return UITableViewHeaderFooterView() }
-        if section == MemoSection.pin.rawValue {
-            header.titleLabel?.text = "고정된 메모"
-            pinList.count == 0 ? headerVisible(header: header, visibility: .gone) : headerVisible(header: header, visibility: .visible)
-            return header
-
-        } else {
-            header.titleLabel.text = "메모"
-            memoList.count == 0 ? headerVisible(header: header, visibility: .gone) : headerVisible(header: header, visibility: .visible)
-            return header
-        }
+        
+        let sectionTitle = section == MemoSection.pin.rawValue ? "고정된 메모" : "메모"
+        header.titleLabel.text = sectionTitle
+        return header
+//        if section == MemoSection.pin.rawValue {
+//            header.titleLabel.text = "고정된 메모"
+//            return header
+//
+//        } else {
+//            header.titleLabel.text = "메모"
+//            return header
+//        }
     }
     
     
@@ -186,6 +177,48 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             return pinList.count != 0 ? 48 : 0
         } else {
             return 48
+        }
+    }
+    
+    //왼쪽 스와이프시 핀 모양 나오도록
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let updateMemo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
+        let pinAction = UIContextualAction(style: .normal, title: "pin", handler: { action, view, completionHaldler in
+            //클릭시 실행될 액션
+            //updateMemo.isPin.toggle()
+            MemoRealmManager.shared.updatePin(item: updateMemo)
+            self.loadMemoData()
+            completionHaldler(true)
+        })
+        
+        pinAction.backgroundColor = .systemOrange
+        pinAction.image = indexPath.section == MemoSection.pin.rawValue ? UIImage(systemName: "pin.slash.fill") : UIImage(systemName: "pin.fill")
+        
+        return UISwipeActionsConfiguration(actions: [pinAction])
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .none:
+            print(#function)
+        case .delete:
+            let deleteItem = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
+            MemoRealmManager.shared.deleteData(item: deleteItem)
+            loadMemoData()
+//            if indexPath.section == MemoSection.pin.rawValue {
+//                let deleteItem = pinList[indexPath.row]
+//                MemoRealmManager.shared.deleteData(item: deleteItem)
+//                loadMemoData()
+//            } else {
+//                let deleteItem = memoList[indexPath.row]
+//                MemoRealmManager.shared.deleteData(item: deleteItem)
+//                loadMemoData()
+//            }
+        case .insert:
+            print(#function)
+        @unknown default:
+            print(#function)
         }
     }
     
