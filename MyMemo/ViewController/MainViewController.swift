@@ -50,6 +50,7 @@ class MainViewController: UIViewController {
         self.navigationItem.searchController = searchController
         self.title = "0개의 메모"
         
+        self.navigationItem.hidesSearchBarWhenScrolling = false //스크롤시 서치바 사라지지 않도록 설정
         self.navigationController?.navigationBar.prefersLargeTitles = true // Large title
     }
 
@@ -154,7 +155,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     //커스텀 섹션 추가후 서치바가 처음 앱을 실행시 나타나지 않다가 스크롤시 나타나는 현상이 생김
-    //에러를 잡아야 하는 상황임.
+    //에러를 잡아야 하는 상황임. -> 서치바가 스크롤시 사라지지 않도록해서 해결, 올바른 방향은 아닌듯...
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Const.CustomCell.MemoHeaderTableView) as? MemoHeaderTableView else { return UITableViewHeaderFooterView() }
         
@@ -177,7 +178,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let updateMemo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
-        let pinAction = UIContextualAction(style: .normal, title: "pin", handler: { action, view, completionHaldler in
+        let pinAction = UIContextualAction(style: .normal, title: "pin") { action, view, completionHaldler in
             
             if !updateMemo.isPin && self.pinList.count >= 5 {
                 self.view.makeToast("고정은 5개까지만 가능합니다!")
@@ -188,7 +189,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.loadMemoData()
             completionHaldler(true)
-        })
+        }
         
         pinAction.backgroundColor = .systemOrange
         pinAction.image = indexPath.section == MemoSection.pin.rawValue ? UIImage(systemName: "pin.slash.fill") : UIImage(systemName: "pin.fill")
@@ -196,30 +197,25 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [pinAction])
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle {
-        case .none:
-            print(#function)
-        case .delete:
-            let deleteItem = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
-            MemoRealmManager.shared.deleteData(item: deleteItem)
-            loadMemoData()
-//            if indexPath.section == MemoSection.pin.rawValue {
-//                let deleteItem = pinList[indexPath.row]
-//                MemoRealmManager.shared.deleteData(item: deleteItem)
-//                loadMemoData()
-//            } else {
-//                let deleteItem = memoList[indexPath.row]
-//                MemoRealmManager.shared.deleteData(item: deleteItem)
-//                loadMemoData()
-//            }
-        case .insert:
-            print(#function)
-        @unknown default:
-            print(#function)
+    //오른쪽 스와이프시 삭제 모양 나오도록
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteMemo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { action, view, completionHandler in
+          
+            let ok = UIAlertAction(title: "확인", style: .default) { _ in
+                MemoRealmManager.shared.deleteData(item: deleteMemo)
+                self.loadMemoData()
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            self.presentAlert(title: "삭제하시겠습니까?", message: "", alertActions: ok, cancel)
+            completionHandler(true)
         }
+        
+        deleteAction.backgroundColor = .systemRed
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-    
+        
     //클릭시 수정화면 전환
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let sb = UIStoryboard(name: "Content", bundle: nil)
