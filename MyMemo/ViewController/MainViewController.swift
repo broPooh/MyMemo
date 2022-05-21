@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import SwiftUI
+import Toast
 
 class MainViewController: UIViewController {
 
@@ -160,14 +161,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let sectionTitle = section == MemoSection.pin.rawValue ? "고정된 메모" : "메모"
         header.titleLabel.text = sectionTitle
         return header
-//        if section == MemoSection.pin.rawValue {
-//            header.titleLabel.text = "고정된 메모"
-//            return header
-//
-//        } else {
-//            header.titleLabel.text = "메모"
-//            return header
-//        }
     }
     
     
@@ -185,9 +178,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let updateMemo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
         let pinAction = UIContextualAction(style: .normal, title: "pin", handler: { action, view, completionHaldler in
-            //클릭시 실행될 액션
-            //updateMemo.isPin.toggle()
+            
+            if !updateMemo.isPin && self.pinList.count >= 5 {
+                self.view.makeToast("고정은 5개까지만 가능합니다!")
+                completionHaldler(true)
+                return
+            }
             MemoRealmManager.shared.updatePin(item: updateMemo)
+            
             self.loadMemoData()
             completionHaldler(true)
         })

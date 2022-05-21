@@ -18,6 +18,7 @@ class MemoTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .none
+        backgroundColor = .lightGray
     }
     
     func configure(memo: Memo) {

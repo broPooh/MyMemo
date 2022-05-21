@@ -24,6 +24,7 @@
 		1B6542CF283776B000DD2350 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6542CE283776B000DD2350 /* ContentViewController.swift */; };
 		1B833D0628387EBE009015A0 /* MemoHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B833D0428387EBE009015A0 /* MemoHeaderTableView.swift */; };
 		1B833D0728387EBE009015A0 /* MemoHeaderTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B833D0528387EBE009015A0 /* MemoHeaderTableView.xib */; };
+		1B833D102838A335009015A0 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 1B833D0F2838A335009015A0 /* Toast */; };
 		1B913B7D283777E5007C1CE3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B7C283777E5007C1CE3 /* UserDefaultsManager.swift */; };
 		1B913B8028377913007C1CE3 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B7F28377913007C1CE3 /* RealmModel.swift */; };
 		1B913B8228377BAC007C1CE3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8128377BAC007C1CE3 /* UserDefaults.swift */; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B833D102838A335009015A0 /* Toast in Frameworks */,
 				1B6542BD2837731800DD2350 /* RealmSwift in Frameworks */,
 				1B6542BB2837731800DD2350 /* Realm in Frameworks */,
 				1B6542C02837733600DD2350 /* IQKeyboardManagerSwift in Frameworks */,
@@ -206,6 +208,7 @@
 				1B6542BA2837731800DD2350 /* Realm */,
 				1B6542BC2837731800DD2350 /* RealmSwift */,
 				1B6542BF2837733600DD2350 /* IQKeyboardManagerSwift */,
+				1B833D0F2838A335009015A0 /* Toast */,
 			);
 			productName = MyMemo;
 			productReference = 1B6542A2283772B800DD2350 /* MyMemo.app */;
@@ -238,6 +241,7 @@
 			packageReferences = (
 				1B6542B92837731800DD2350 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				1B6542BE2837733600DD2350 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				1B833D0E2838A335009015A0 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 1B6542A3283772B800DD2350 /* Products */;
 			projectDirPath = "";
@@ -521,6 +525,14 @@
 				kind = branch;
 			};
 		};
+		1B833D0E2838A335009015A0 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -538,6 +550,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B6542BE2837733600DD2350 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		1B833D0F2838A335009015A0 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B833D0E2838A335009015A0 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
