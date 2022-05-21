@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 
+//이 Delgate를 통해 검색후 핀, 삭제시 Main화면 테이블뷰 갱신처리
 protocol SearchReloadDelgate {
     func reloadTableView()
 }

@@ -29,6 +29,7 @@ class ContentViewController: UIViewController {
 
         initNavigation()
         initData()
+        memoTextView.delegate = self
         
     }
     
@@ -47,6 +48,7 @@ class ContentViewController: UIViewController {
         if mode == ContentMode.edit {
             guard let memoResult = memo else { return }
             memoTextView.text = memoResult.title + "\n" + memoResult.content
+            memoTitleConfig()
         } else {
             memoTextView.becomeFirstResponder()
         }
@@ -88,6 +90,24 @@ class ContentViewController: UIViewController {
     
     func checkInputMemo(title: String?, content: String?) -> Bool {
         return title != "" && content != "" ? true : false
+    }
+    
+    func memoTitleConfig() {
+        let memoString = memoTextView.text.split(separator: "\n")
+        let memoTitle = memoString.count > 0 ? String(memoString[0]) : ""
+        //let memoContent = memoString.count > 1 ? String(memoString[1]) : ""
+        //NSMutableAttributedString으로 부분적 폰트 적용하기
+        let userInputAttributedString = NSMutableAttributedString(string: memoTextView.text)
+        userInputAttributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 20, weight: .bold), range: (memoTextView.text as NSString).range(of: memoTitle))
+        memoTextView.attributedText = userInputAttributedString
+    }
+    
+}
+
+extension ContentViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.memoTitleConfig()
     }
     
 }
