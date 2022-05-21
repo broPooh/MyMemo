@@ -17,6 +17,7 @@ class MemoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        selectionStyle = .none
     }
     
     func configure(memo: Memo) {

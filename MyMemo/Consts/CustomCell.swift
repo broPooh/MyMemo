@@ -11,5 +11,6 @@ extension Const {
     
     struct CustomCell {
         static let MemoTableViewCell = "MemoTableViewCell"
+        static let MemoHeaderTableView = "MemoHeaderTableView"
     }
 }
