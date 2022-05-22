@@ -111,7 +111,7 @@ class ContentViewController: UIViewController {
         
         //NSMutableAttributedString으로 부분적 폰트 적용하기
         let userInputAttributedString = NSMutableAttributedString(string: memoTextView.text)
-        userInputAttributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 20, weight: .bold), range: (memoTextView.text as NSString).range(of: memoTitle))
+        userInputAttributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24, weight: .bold), range: (memoTextView.text as NSString).range(of: memoTitle))
         memoTextView.attributedText = userInputAttributedString
     }
     

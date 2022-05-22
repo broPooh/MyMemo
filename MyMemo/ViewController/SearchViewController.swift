@@ -134,15 +134,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     //왼쪽 스와이프시 핀 모양 나오도록
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        
-        print("ss", totalPinMemo.count)
-        
         let updateMemo = searchResult[indexPath.row]
         let pinAction = UIContextualAction(style: .normal, title: "pin") { action, view, completionHaldler in
                         
             if !updateMemo.isPin && self.totalPinMemo.count >= 5 {
-                self.view.makeToast("고정은 5개까지만 가능합니다!")
+                //self.view.makeToast("고정은 5개까지만 가능합니다!")
+                self.view.makeToast("고정은 5개까지만 가능합니다!", duration: 1.0, position: .center)
                 completionHaldler(true)
                 return
             }
