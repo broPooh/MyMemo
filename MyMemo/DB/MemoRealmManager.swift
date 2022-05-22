@@ -43,7 +43,6 @@ final class MemoRealmManager: RealmRepository {
     }
     
     func updateData(item: Memo, title: String, content: String, writeAt: Date) {
-        print("업데이트")
         try! localRealm.write {
             item.title = title
             item.content = content

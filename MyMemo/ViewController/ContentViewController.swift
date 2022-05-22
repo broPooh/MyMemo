@@ -24,11 +24,14 @@ class ContentViewController: UIViewController {
     var shareButton: UIBarButtonItem?
     var finishButton: UIBarButtonItem?
     
+    var currentPosition: UITextPosition?
+    var currentOffset: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initData()
-        memoTextView.delegate = self
+        textViewConfig()
         
     }
     
@@ -56,6 +59,12 @@ class ContentViewController: UIViewController {
         } else {
             memoTextView.becomeFirstResponder()
         }
+    }
+    
+    func textViewConfig() {
+        memoTextView.delegate = self
+        memoTextView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        memoTextView.scrollIndicatorInsets = memoTextView.textContainerInset
     }
     
     @objc func shareButtonClicked() {
@@ -88,7 +97,6 @@ class ContentViewController: UIViewController {
             memo = Memo(title: memoTitle, content: memoContent, writeAt: writeAt)
             checkInputMemo(title: memoTitle, content: memoContent) ? MemoRealmManager.shared.saveData(item: memo!) : print("데이터 없음"); return
         } else {
-            print("\(checkInputMemo(title: memoTitle, content: memoContent))")
             checkInputMemo(title: memoTitle, content: memoContent) ? MemoRealmManager.shared.updateData(item: memo!, title: memoTitle, content: memoContent, writeAt: writeAt) : MemoRealmManager.shared.deleteData(item: memo!)
         }
     }
@@ -112,12 +120,28 @@ class ContentViewController: UIViewController {
 extension ContentViewController: UITextViewDelegate {
     
     //처음 작성시에는 괜찮은데 수정시에 타이틀을 수정하려고 하면 커서가 한글자 작성후 컨텐츠로 이동이되는데 해결못함..
+    //NSMutableAttributedString 적용전 커서위치를 기억하고 있다가 적용후에 원래 커서 위치로 이동하도록 해서 해결
     func textViewDidChange(_ textView: UITextView) {
+        print("앤 언제 호출되니 textViewDidChange")
+        let textRange = textView.selectedTextRange!
+        self.currentOffset = textView.offset(from: textView.beginningOfDocument, to: textRange.start)
         self.memoTitleConfig()
+        if let newPosition = textView.position(from: textView.beginningOfDocument, offset: self.currentOffset) {
+            textView.selectedTextRange = textView.textRange(from: newPosition, to: newPosition)
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.initNavigation()
+    }
+    
+    //textViewDidChange 보다 먼저 호출
+    //입력하거나 삭제할때마다 호출됨
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        print("앤 언제 호출되니 should")
+        //let textRange = textView.selectedTextRange!
+        //self.currentOffset = textView.offset(from: textView.beginningOfDocument, to: textRange.start)
+        return true
     }
     
 }
