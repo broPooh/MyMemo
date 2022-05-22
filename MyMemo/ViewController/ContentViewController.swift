@@ -106,8 +106,9 @@ class ContentViewController: UIViewController {
         }
     }
     
-    func checkInputMemo(title: String?, content: String?) -> Bool {
-        return title != "" && content != "" ? true : false
+    func checkInputMemo(title: String, content: String) -> Bool {
+        //return title != "" && content != "" ? true : false
+        return !title.isEmpty ? true : false
     }
     
     func memoTitleConfig() {
