@@ -27,7 +27,6 @@ class ContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initNavigation()
         initData()
         memoTextView.delegate = self
         
@@ -108,6 +107,10 @@ extension ContentViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         self.memoTitleConfig()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.initNavigation()
     }
     
 }
