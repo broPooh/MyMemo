@@ -20,6 +20,8 @@ protocol RealmRepository {
     func saveData(item: Memo)
     func deleteData(item: Memo)
     func updateData(item: Memo)
-    func searchPinDatas() -> Results<Memo>
+    func updateData(item: Memo, title: String, content: String, writeAt: Date)
+    func updatePin(item: Memo)
+    func searchMemoData(searchText: String) -> Results<Memo>
     
 }

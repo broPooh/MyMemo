@@ -66,7 +66,6 @@ class ContentViewController: UIViewController {
     }
     
     @objc func finishButtonClicked() {
-        //finishData()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -94,7 +93,7 @@ class ContentViewController: UIViewController {
     func memoTitleConfig() {
         let memoString = memoTextView.text.split(separator: "\n")
         let memoTitle = memoString.count > 0 ? String(memoString[0]) : ""
-        //let memoContent = memoString.count > 1 ? String(memoString[1]) : ""
+        
         //NSMutableAttributedString으로 부분적 폰트 적용하기
         let userInputAttributedString = NSMutableAttributedString(string: memoTextView.text)
         userInputAttributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 20, weight: .bold), range: (memoTextView.text as NSString).range(of: memoTitle))
