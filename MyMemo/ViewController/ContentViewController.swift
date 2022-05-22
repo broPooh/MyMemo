@@ -37,6 +37,11 @@ class ContentViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        //finishData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         finishData()
     }
     
@@ -80,7 +85,7 @@ class ContentViewController: UIViewController {
     }
     
     @objc func finishButtonClicked() {
-        finishData()
+        //finishData()
         hiddenNavigationItems()
     }
     

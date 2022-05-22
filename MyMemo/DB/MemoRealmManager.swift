@@ -19,6 +19,7 @@ final class MemoRealmManager: RealmRepository {
     }
         
     func saveData(item: Memo) {
+        print("메모 저장")
         try! localRealm.write {
             localRealm.add(item)
         }
@@ -60,14 +61,14 @@ final class MemoRealmManager: RealmRepository {
 //    func searchPinDatas() -> Results<Memo> {
 //        return localRealm.objects(Memo.self).filter("isPin == true")
 //            //.sorted(byKeyPath: "writeAt", ascending: false)
-////        if pinMemoList.count > 5 {
-////            var pinList = Results<Memo>()
-////            for item in 0..<5 {
-////                pinList.add(item)
-////            }
-////            return pinList
-////        }
-////        return pinMemoList
+//        if pinMemoList.count > 5 {
+//            var pinList = Results<Memo>()
+//            for item in 0..<5 {
+//                pinList.add(item)
+//            }
+//            return pinList
+//        }
+//        return pinMemoList
 //    }
     
     func searchMemoData(searchText: String) -> Results<Memo> {
