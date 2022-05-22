@@ -33,12 +33,13 @@ class MainViewController: UIViewController {
         //ViewConroller를 호출시 didLoad에서 호출하면 가장 밑의 뷰 컨트롤러가 무엇인지 특정할 수 없는 오류가 발생
         //DidAppear에서 처음 온 유저를 환영하는 얼럿모양의 화면이 뜨도록 구현
         checkFirstShowed()
+        //검색화면에서 클릭후 콘텐트 화면 갔다 복귀시 네비게이션이 깨지는 현상을 잡기위해 추가
+        self.navigationController?.navigationBar.prefersLargeTitles = true // Large title
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //작성후 복귀하면서 전체 데이터 리로드
-        print("Main viewWillAppear")
         loadMemoData()
     }
     
@@ -250,6 +251,8 @@ extension MainViewController: SearchDelegate {
     }
     
     func presentSearchResult(memo: Memo) {
+        //검색화면에서 클릭후 콘텐트 화면 갔다 복귀시 네비게이션이 깨지는 현상을 잡기위해 추가
+        self.navigationController?.navigationBar.prefersLargeTitles = false // Large title
         let sb = UIStoryboard(name: "Content", bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
             print("instantiateViewController not Found")
