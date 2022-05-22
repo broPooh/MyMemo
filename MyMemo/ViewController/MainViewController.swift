@@ -50,15 +50,12 @@ class MainViewController: UIViewController {
             return
         }
         resultVC.searchDelegate = self
-        let navResultVC = UINavigationController(rootViewController:  resultVC)
-
-        let searchController = UISearchController(searchResultsController: navResultVC)
+        let searchController = UISearchController(searchResultsController: resultVC)
         //searchResultsUpdater를 SearchViewController에서 하도록 위임
         searchController.searchResultsUpdater = resultVC
         searchController.searchBar.placeholder = "검색"
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = true
-        self.definesPresentationContext = true
+        searchController.hidesNavigationBarDuringPresentation = false //검색하는 동안 네비게이션바에 가려지지않도록한다
+        //self.definesPresentationContext = true
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false //스크롤시 서치바 사라지지 않도록 설정
@@ -246,10 +243,25 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension MainViewController: SearchReloadDelgate {
+extension MainViewController: SearchDelegate {
 
     func reloadTableView() {
         self.loadMemoData()
+    }
+    
+    func presentSearchResult(memo: Memo) {
+        let sb = UIStoryboard(name: "Content", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
+            print("instantiateViewController not Found")
+            return
+        }
+
+        //메모 수정 화면 변경시 백아이템 타이틀변경
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "검색", style: .plain, target: nil, action: nil)
+        vc.memo = memo
+        vc.mode = ContentMode.edit
+        self.navigationController?.pushViewController(vc, animated: true )
     }
     
 }

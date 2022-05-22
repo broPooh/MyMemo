@@ -9,15 +9,17 @@ import UIKit
 import RealmSwift
 
 //이 Delgate를 통해 검색후 핀, 삭제시 Main화면 테이블뷰 갱신처리
-protocol SearchReloadDelgate {
+//이 Delgate를 통해 검색후 클릭시 화면전환 처리
+protocol SearchDelegate {
     func reloadTableView()
+    func presentSearchResult(memo: Memo)
 }
 
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchTableView: UITableView!
     var searchText: String = ""
     
-    var searchDelegate: SearchReloadDelgate?
+    var searchDelegate: SearchDelegate?
     
     var totalPinMemo: Results<Memo>!
     var searchResult: Results<Memo>! {
@@ -179,20 +181,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     //클릭시 수정화면 전환
     // 클릭은 한거 같은데 왜 화면 전환이 안되지.?
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "Content", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
-            print("instantiateViewController not Found")
-            return
-        }
-
-        //메모 수정 화면 변경시 백아이템 타이틀변경
-        navigationItem.backBarButtonItem = UIBarButtonItem(
-            title: "검색", style: .plain, target: nil, action: nil)
-        vc.memo = searchResult[indexPath.row]
-        vc.mode = ContentMode.edit
-        //vc.modalPresentationStyle = .fullScreen
-        //present(vc, animated: true, completion: nil)
-        self.navigationController?.pushViewController(vc, animated: true )
+        searchDelegate?.presentSearchResult(memo: searchResult[indexPath.row])
     }
     
 }
@@ -209,4 +198,3 @@ extension SearchViewController: UISearchResultsUpdating {
   }
         
 }
-
