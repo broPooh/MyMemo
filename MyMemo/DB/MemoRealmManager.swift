@@ -43,10 +43,11 @@ final class MemoRealmManager: RealmRepository {
     }
     
     func updateData(item: Memo, title: String, content: String, writeAt: Date) {
+        print("업데이트")
         try! localRealm.write {
-            item.title = item.title
-            item.content = item.content
-            item.writeAt = item.writeAt
+            item.title = title
+            item.content = content
+            item.writeAt = writeAt
         }
     }
     

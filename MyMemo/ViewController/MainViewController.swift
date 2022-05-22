@@ -161,7 +161,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return CGFloat(MemoTableHeight.content.rawValue)
     }
     
     //커스텀 섹션 추가후 서치바가 처음 앱을 실행시 나타나지 않다가 스크롤시 나타나는 현상이 생김
@@ -178,9 +178,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if section == MemoSection.pin.rawValue {
-            return pinList.count != 0 ? 48 : 0
+            return CGFloat(pinList.count != 0 ? MemoTableHeight.header.rawValue : MemoTableHeight.zero.rawValue)
         } else {
-            return 48
+            return CGFloat(MemoTableHeight.header.rawValue)
         }
     }
     

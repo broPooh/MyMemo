@@ -43,6 +43,11 @@ class ContentViewController: UIViewController {
         navigationItem.rightBarButtonItems = [finishButton!, shareButton!]
     }
     
+    func hiddenNavigationItems() {
+        view.endEditing(true)
+        navigationItem.rightBarButtonItems = nil
+    }
+    
     func initData() {
         if mode == ContentMode.edit {
             guard let memoResult = memo else { return }
@@ -66,7 +71,8 @@ class ContentViewController: UIViewController {
     }
     
     @objc func finishButtonClicked() {
-        self.navigationController?.popViewController(animated: true)
+        finishData()
+        hiddenNavigationItems()
     }
     
     func finishData() {
@@ -82,6 +88,7 @@ class ContentViewController: UIViewController {
             memo = Memo(title: memoTitle, content: memoContent, writeAt: writeAt)
             checkInputMemo(title: memoTitle, content: memoContent) ? MemoRealmManager.shared.saveData(item: memo!) : print("데이터 없음"); return
         } else {
+            print("\(checkInputMemo(title: memoTitle, content: memoContent))")
             checkInputMemo(title: memoTitle, content: memoContent) ? MemoRealmManager.shared.updateData(item: memo!, title: memoTitle, content: memoContent, writeAt: writeAt) : MemoRealmManager.shared.deleteData(item: memo!)
         }
     }
@@ -104,6 +111,7 @@ class ContentViewController: UIViewController {
 
 extension ContentViewController: UITextViewDelegate {
     
+    //처음 작성시에는 괜찮은데 수정시에 타이틀을 수정하려고 하면 커서가 한글자 작성후 컨텐츠로 이동이되는데 해결못함..
     func textViewDidChange(_ textView: UITextView) {
         self.memoTitleConfig()
     }
