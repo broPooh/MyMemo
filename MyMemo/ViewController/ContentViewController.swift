@@ -128,7 +128,7 @@ extension ContentViewController: UITextViewDelegate {
     //처음 작성시에는 괜찮은데 수정시에 타이틀을 수정하려고 하면 커서가 한글자 작성후 컨텐츠로 이동이되는데 해결못함..
     //NSMutableAttributedString 적용전 커서위치를 기억하고 있다가 적용후에 원래 커서 위치로 이동하도록 해서 해결
     func textViewDidChange(_ textView: UITextView) {
-        print("앤 언제 호출되니 textViewDidChange")
+        //print("앤 언제 호출되니 textViewDidChange")
         let textRange = textView.selectedTextRange!
         self.currentOffset = textView.offset(from: textView.beginningOfDocument, to: textRange.start)
         self.memoTitleConfig()
@@ -144,7 +144,7 @@ extension ContentViewController: UITextViewDelegate {
     //textViewDidChange 보다 먼저 호출
     //입력하거나 삭제할때마다 호출됨
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        print("앤 언제 호출되니 should")
+        //print("앤 언제 호출되니 should")
         //let textRange = textView.selectedTextRange!
         //self.currentOffset = textView.offset(from: textView.beginningOfDocument, to: textRange.start)
         return true
