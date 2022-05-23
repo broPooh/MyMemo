@@ -11,5 +11,7 @@ extension Const {
     struct Storyboard {
         static let FirstScreen = "FirstScreen"
         static let Content = "Content"
+        static let Search = "Search"
+        static let Main = "Main"
     }
 }

@@ -8,19 +8,25 @@
 import Foundation
 import RealmSwift
 
+enum RealmFilter: String {
+    case isPin = "isPin == true"
+    case noPin = "isPin == false"
+}
+
 final class MemoRealmManager: RealmRepository {
     static let shared = MemoRealmManager()
-    private let localRealm = try! Realm()
+    //private let localRealm = try! Realm()
     
     private init() {  }
 
     func loadDatas() -> Results<Memo> {
+        let localRealm = try! Realm()
         return localRealm.objects(Memo.self).sorted(byKeyPath: "writeAt", ascending: false)
     }
         
     func saveData(item: Memo) {
         print("메모 저장")
-        
+        let localRealm = try! Realm()
         do {
             try localRealm.write {
                 localRealm.add(item)
@@ -35,6 +41,7 @@ final class MemoRealmManager: RealmRepository {
     }
     
     func deleteData(item: Memo) {
+        let localRealm = try! Realm()
         do {
             try localRealm.write {
                 localRealm.delete(item)
@@ -49,6 +56,7 @@ final class MemoRealmManager: RealmRepository {
     
     //tranjection Error 발생, 어떻게 해결해야할지 몰라서 하나씩 꺼내서 다 지정하도록 변경
     func updateData(item: Memo) {
+        let localRealm = try! Realm()
         if let updateItem = localRealm.objects(Memo.self).where({ $0._id == item._id }).first {
             do {
                 try localRealm.write {
@@ -70,6 +78,7 @@ final class MemoRealmManager: RealmRepository {
     }
     
     func updateData(item: Memo, title: String, content: String, writeAt: Date) {
+        let localRealm = try! Realm()
         do {
             try localRealm.write {
                 item.title = title
@@ -87,6 +96,7 @@ final class MemoRealmManager: RealmRepository {
     }
     
     func updatePin(item: Memo) {
+        let localRealm = try! Realm()
         do {
             try localRealm.write {
                 item.isPin.toggle()
@@ -114,9 +124,15 @@ final class MemoRealmManager: RealmRepository {
 //    }
     
     func searchMemoData(searchText: String) -> Results<Memo> {
+        let localRealm = try! Realm()
         return localRealm.objects(Memo.self).where({
             $0.title.contains(searchText) || $0.content.contains(searchText)
         })
+    }
+    
+    func loadDataWithFileter(filter: RealmFilter) -> Results<Memo> {
+        let localRealm = try! Realm()
+        return localRealm.objects(Memo.self).filter(filter.rawValue).sorted(byKeyPath: "writeAt", ascending: false)
     }
     
 }

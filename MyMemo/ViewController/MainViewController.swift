@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
     
     func initSearchBar() {
         
-        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let sb = UIStoryboard(name: Const.Storyboard.Search, bundle: nil)
         guard let resultVC = sb.instantiateViewController(withIdentifier: Const.ViewController.SearchViewController) as? SearchViewController else {
             return
         }
@@ -107,14 +107,13 @@ class MainViewController: UIViewController {
     
     // MARK: - Data Handeling
     func loadMemoData() {
-        let results = MemoRealmManager.shared.loadDatas()
-        memoList = results.filter("isPin == false")
-        pinList = results.filter("isPin == true")
+        memoList = MemoRealmManager.shared.loadDataWithFileter(filter: .noPin)
+        pinList = MemoRealmManager.shared.loadDataWithFileter(filter: .isPin)
         setTitleMemoCount()
     }
 
     @IBAction func writeBarButtonItemClicked(_ sender: UIBarButtonItem) {
-        let sb = UIStoryboard(name: "Content", bundle: nil)
+        let sb = UIStoryboard(name: Const.Storyboard.Content, bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
             print("instantiateViewController not Found")
             return
@@ -201,7 +200,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         pinAction.backgroundColor = .systemOrange
-        pinAction.image = indexPath.section == MemoSection.pin.rawValue ? UIImage(systemName: "pin.slash.fill") : UIImage(systemName: "pin.fill")
+        pinAction.image = indexPath.section == MemoSection.pin.rawValue ? UIImage(systemName: SystemImage.slashPin.rawValue) : UIImage(systemName: SystemImage.pin.rawValue)
         
         return UISwipeActionsConfiguration(actions: [pinAction])
     }
@@ -221,13 +220,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         deleteAction.backgroundColor = .systemRed
-        deleteAction.image = UIImage(systemName: "trash.fill")
+        deleteAction.image = UIImage(systemName: SystemImage.trash.rawValue)
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
         
     //클릭시 수정화면 전환
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "Content", bundle: nil)
+        let sb = UIStoryboard(name: Const.Storyboard.Content, bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
             print("instantiateViewController not Found")
             return
@@ -252,7 +251,7 @@ extension MainViewController: SearchDelegate {
     func presentSearchResult(memo: Memo) {
         //검색화면에서 클릭후 콘텐트 화면 갔다 복귀시 네비게이션이 깨지는 현상을 잡기위해 추가
         self.navigationController?.navigationBar.prefersLargeTitles = false // Large title
-        let sb = UIStoryboard(name: "Content", bundle: nil)
+        let sb = UIStoryboard(name: Const.Storyboard.Content, bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: Const.ViewController.ContentViewController) as? ContentViewController else {
             print("instantiateViewController not Found")
             return

@@ -79,16 +79,18 @@ class SearchViewController: UIViewController {
     
     
     func loadData(search: String) {
-        let result = MemoRealmManager.shared.loadDatas()
-        totalPinMemo = result.filter("isPin == true")
-        searchResult = searchMemoData(totalMemo: result, searchText: search)
+        //let result = MemoRealmManager.shared.loadDatas()
+        //totalPinMemo = result.filter("isPin == true")
+        totalPinMemo = MemoRealmManager.shared.loadDataWithFileter(filter: .isPin)
+        //searchResult = searchMemoData(totalMemo: result, searchText: search)
+        searchResult = MemoRealmManager.shared.searchMemoData(searchText: search)
     }
     
-    func searchMemoData(totalMemo: Results<Memo> ,searchText: String) -> Results<Memo> {
-        return totalMemo.where({
-            $0.title.contains(searchText) || $0.content.contains(searchText)
-        })
-    }
+//    func searchMemoData(totalMemo: Results<Memo> ,searchText: String) -> Results<Memo> {
+//        return totalMemo.where({
+//            $0.title.contains(searchText) || $0.content.contains(searchText)
+//        })
+//    }
 }
 
 
@@ -149,7 +151,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         pinAction.backgroundColor = .systemOrange
-        pinAction.image = updateMemo.isPin ? UIImage(systemName: "pin.slash.fill") : UIImage(systemName: "pin.fill")
+        pinAction.image = updateMemo.isPin ? UIImage(systemName: SystemImage.slashPin.rawValue) : UIImage(systemName: SystemImage.pin.rawValue)
         
         return UISwipeActionsConfiguration(actions: [pinAction])
     }
@@ -171,7 +173,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         deleteAction.backgroundColor = .systemRed
-        deleteAction.image = UIImage(systemName: "trash.fill")
+        deleteAction.image = UIImage(systemName: SystemImage.trash.rawValue)
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     

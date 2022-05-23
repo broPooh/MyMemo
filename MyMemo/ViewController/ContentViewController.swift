@@ -46,7 +46,7 @@ class ContentViewController: UIViewController {
     }
     
     func initNavigation() {
-        shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareButtonClicked))
+        shareButton = UIBarButtonItem(image: UIImage(systemName: SystemImage.share.rawValue), style: .plain, target: self, action: #selector(shareButtonClicked))
         finishButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(finishButtonClicked))
         navigationItem.rightBarButtonItems = [finishButton!, shareButton!]
     }

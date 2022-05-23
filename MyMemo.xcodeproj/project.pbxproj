@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B1D5511283BAF2C001B8F85 /* ImageEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D5510283BAF2C001B8F85 /* ImageEnums.swift */; };
 		1B6542A6283772B800DD2350 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6542A5283772B800DD2350 /* AppDelegate.swift */; };
 		1B6542A8283772B800DD2350 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6542A7283772B800DD2350 /* SceneDelegate.swift */; };
 		1B6542AA283772B800DD2350 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6542A9283772B800DD2350 /* MainViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B1D5510283BAF2C001B8F85 /* ImageEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEnums.swift; sourceTree = "<group>"; };
 		1B6542A2283772B800DD2350 /* MyMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6542A5283772B800DD2350 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B6542A7283772B800DD2350 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				1B913B942837A816007C1CE3 /* MemoEnums.swift */,
 				1B833D192839FBDC009015A0 /* SizeEnums.swift */,
+				1B1D5510283BAF2C001B8F85 /* ImageEnums.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				1B833D0628387EBE009015A0 /* MemoHeaderTableView.swift in Sources */,
 				1B6542CB2837754500DD2350 /* ViewController.swift in Sources */,
+				1B1D5511283BAF2C001B8F85 /* ImageEnums.swift in Sources */,
 				1B913B8B28378519007C1CE3 /* CustomCell.swift in Sources */,
 				1B913B8428377D09007C1CE3 /* Storyboard.swift in Sources */,
 				1B6542AA283772B800DD2350 /* MainViewController.swift in Sources */,
