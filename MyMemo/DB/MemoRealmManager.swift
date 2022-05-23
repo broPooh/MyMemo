@@ -20,41 +20,83 @@ final class MemoRealmManager: RealmRepository {
         
     func saveData(item: Memo) {
         print("메모 저장")
-        try! localRealm.write {
-            localRealm.add(item)
+        
+        do {
+            try localRealm.write {
+                localRealm.add(item)
+            }
+        } catch {
+            print("Error save : \(error)")
         }
+        
+//        try! localRealm.write {
+//            localRealm.add(item)
+//        }
     }
     
     func deleteData(item: Memo) {
-        try! localRealm.write {
-            localRealm.delete(item)
+        do {
+            try localRealm.write {
+                localRealm.delete(item)
+            }
+        } catch {
+            print("Error Delete : \(error)")
         }
+//        try! localRealm.write {
+//            localRealm.delete(item)
+//        }
     }
     
     //tranjection Error 발생, 어떻게 해결해야할지 몰라서 하나씩 꺼내서 다 지정하도록 변경
     func updateData(item: Memo) {
         if let updateItem = localRealm.objects(Memo.self).where({ $0._id == item._id }).first {
-            try! localRealm.write {
-                updateItem.title = item.title
-                updateItem.content = item.content
-                updateItem.isPin = item.isPin
-                updateItem.writeAt = item.writeAt
+            do {
+                try localRealm.write {
+                    updateItem.title = item.title
+                    updateItem.content = item.content
+                    updateItem.isPin = item.isPin
+                    updateItem.writeAt = item.writeAt
+                }
+            } catch {
+                print("Error Update : \(error)")
             }
+//            try! localRealm.write {
+//                updateItem.title = item.title
+//                updateItem.content = item.content
+//                updateItem.isPin = item.isPin
+//                updateItem.writeAt = item.writeAt
+//            }
         }
     }
     
     func updateData(item: Memo, title: String, content: String, writeAt: Date) {
-        try! localRealm.write {
-            item.title = title
-            item.content = content
-            item.writeAt = writeAt
+        do {
+            try localRealm.write {
+                item.title = title
+                item.content = content
+                item.writeAt = writeAt
+            }
+        } catch {
+            print("Error Update : \(error)")
         }
+//        try! localRealm.write {
+//            item.title = title
+//            item.content = content
+//            item.writeAt = writeAt
+//        }
     }
     
     func updatePin(item: Memo) {
-        try! localRealm.write {
-            item.isPin.toggle()
+        do {
+            try localRealm.write {
+                item.isPin.toggle()
+            }
+        } catch {
+            print("Error UpdatePin : \(error)")
         }
+//        try! localRealm.write {
+//            item.isPin.toggle()
+//        }
     }
     
     //5개 제한을 걸어서 보내려 했는데 실패. tableView에서 처리하도록 우선 해결해보도록 할 예정
