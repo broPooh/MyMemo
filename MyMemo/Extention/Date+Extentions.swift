@@ -22,11 +22,14 @@ extension Date {
         formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "ko-KR")
         return formatter.string(from: self)
     }
-
+    
     func isEqual(to date: Date, toGranularity component: Calendar.Component, in calendar: Calendar = .current) -> Bool {
-            calendar.isDate(self, equalTo: date, toGranularity: component)
-        }
-    func isInSameWeek(as date: Date) -> Bool { isEqual(to: date, toGranularity: .weekOfYear) }
+        return calendar.isDate(Date(), equalTo: date, toGranularity: component)
+    }
+    
+    func isInSameWeek(as date: Date) -> Bool {
+        return isEqual(to: date, toGranularity: .weekOfYear)
+    }
 
 }
 

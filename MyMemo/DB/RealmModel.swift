@@ -12,12 +12,12 @@ class Memo: Object {
     
     @Persisted var title: String
     @Persisted var writeAt: Date
-    @Persisted var content: String
+    @Persisted var content: String?
     @Persisted var isPin: Bool
     
     @Persisted(primaryKey: true) var _id: ObjectId
     
-    convenience init(title: String, content: String, writeAt: Date) {
+    convenience init(title: String, content: String?, writeAt: Date) {
         self.init()
         
         self.title = title

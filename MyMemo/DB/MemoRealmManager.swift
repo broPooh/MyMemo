@@ -17,6 +17,8 @@ final class MemoRealmManager: RealmRepository {
     static let shared = MemoRealmManager()
     //private let localRealm = try! Realm()
     
+    //let realm = Realm()
+    
     private init() {  }
 
     func loadDatas() -> Results<Memo> {
@@ -77,7 +79,7 @@ final class MemoRealmManager: RealmRepository {
         }
     }
     
-    func updateData(item: Memo, title: String, content: String, writeAt: Date) {
+    func updateData(item: Memo, title: String, content: String?, writeAt: Date) {
         let localRealm = try! Realm()
         do {
             try localRealm.write {
@@ -133,6 +135,11 @@ final class MemoRealmManager: RealmRepository {
     func loadDataWithFileter(filter: RealmFilter) -> Results<Memo> {
         let localRealm = try! Realm()
         return localRealm.objects(Memo.self).filter(filter.rawValue).sorted(byKeyPath: "writeAt", ascending: false)
+    }
+    
+    func loadDataWithFileter(isPin: Bool) -> Results<Memo> {
+        let localRealm = try! Realm()
+        return localRealm.objects(Memo.self).where { $0.isPin == isPin }.sorted(byKeyPath: "writeAt", ascending: false)
     }
     
 }

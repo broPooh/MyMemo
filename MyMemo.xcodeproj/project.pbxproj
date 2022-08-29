@@ -41,6 +41,7 @@
 		1B913B902837A2E8007C1CE3 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B8F2837A2E8007C1CE3 /* RealmRepository.swift */; };
 		1B913B922837A375007C1CE3 /* MemoRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B912837A375007C1CE3 /* MemoRealmManager.swift */; };
 		1B913B952837A816007C1CE3 /* MemoEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B913B942837A816007C1CE3 /* MemoEnums.swift */; };
+		1B9DE411283C8A3200BAFA0F /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9DE410283C8A3200BAFA0F /* Navigator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		1B913B8F2837A2E8007C1CE3 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		1B913B912837A375007C1CE3 /* MemoRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRealmManager.swift; sourceTree = "<group>"; };
 		1B913B942837A816007C1CE3 /* MemoEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEnums.swift; sourceTree = "<group>"; };
+		1B9DE410283C8A3200BAFA0F /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		1B6542A4283772B800DD2350 /* MyMemo */ = {
 			isa = PBXGroup;
 			children = (
+				1B9DE40F283C8A2300BAFA0F /* Common */,
 				1B913B932837A7FD007C1CE3 /* Enums */,
 				1B913B8C2837859F007C1CE3 /* Extention */,
 				1B913B7E28377906007C1CE3 /* DB */,
@@ -201,6 +204,14 @@
 				1B1D5510283BAF2C001B8F85 /* ImageEnums.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		1B9DE40F283C8A2300BAFA0F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1B9DE410283C8A3200BAFA0F /* Navigator.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +305,7 @@
 				1B6542CB2837754500DD2350 /* ViewController.swift in Sources */,
 				1B1D5511283BAF2C001B8F85 /* ImageEnums.swift in Sources */,
 				1B913B8B28378519007C1CE3 /* CustomCell.swift in Sources */,
+				1B9DE411283C8A3200BAFA0F /* Navigator.swift in Sources */,
 				1B913B8428377D09007C1CE3 /* Storyboard.swift in Sources */,
 				1B6542AA283772B800DD2350 /* MainViewController.swift in Sources */,
 				1B6542C6283774D800DD2350 /* FirstScreenViewController.swift in Sources */,
@@ -458,6 +470,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyMemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -485,6 +498,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyMemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

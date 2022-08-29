@@ -106,15 +106,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let memo = searchResult[indexPath.row]
         
         //NSMutableAttributedString으로 부분적 색상변경 적용하기
-        let titleAttributedString = NSMutableAttributedString(string: memo.title)
-        let contentAttributedString = NSMutableAttributedString(string: memo.content)
-        
-        titleAttributedString.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (memo.title as NSString).range(of: searchText))
-        contentAttributedString.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (memo.content as NSString).range(of: searchText))
-        
-        cell.configure(memo: memo)
-        cell.titleLabel.attributedText = titleAttributedString
-        cell.contentLabel.attributedText = contentAttributedString
+        cell.configure(memo: memo, searchText: searchText)
 
         return cell
     }

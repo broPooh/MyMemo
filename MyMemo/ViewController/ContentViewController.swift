@@ -59,7 +59,7 @@ class ContentViewController: UIViewController {
     func initData() {
         if mode == ContentMode.edit {
             guard let memoResult = memo else { return }
-            memoTextView.text = memoResult.title + "\n" + memoResult.content
+            memoTextView.text = memoResult.title + "\n" + (memoResult.content ?? "")
             memoTitleConfig()
         } else {
             memoTextView.becomeFirstResponder()
@@ -94,7 +94,7 @@ class ContentViewController: UIViewController {
         
         let memoString = userInputText.split(separator: "\n")
         let memoTitle = memoString.count > 0 ? String(memoString[0]) : ""
-        let memoContent = memoString.count > 1 ? String(memoString[1]) : ""
+        let memoContent = memoString.count > 1 ? String(memoString[1]) : nil
         let writeAt = Date()
         
         
@@ -106,7 +106,7 @@ class ContentViewController: UIViewController {
         }
     }
     
-    func checkInputMemo(title: String, content: String) -> Bool {
+    func checkInputMemo(title: String, content: String?) -> Bool {
         //return title != "" && content != "" ? true : false
         return !title.isEmpty ? true : false
     }

@@ -21,10 +21,28 @@ class MemoTableViewCell: UITableViewCell {
         backgroundColor = .lightGray
     }
     
+    func configure(memo: Memo, searchText: String) {
+        //titleLabel.text = memo.title
+        //dateLabel.text = memo.writeAt.toString()
+        contentLabel.text = memo.content ?? "추가 텍스트 없음"
+        
+        changeColor(memo: memo, searchText: searchText)
+    }
+    
     func configure(memo: Memo) {
         titleLabel.text = memo.title
         dateLabel.text = memo.writeAt.toString()
-        contentLabel.text = memo.content
+        contentLabel.text = memo.content ?? "추가 텍스트 없음"
+    }
+    
+    func changeColor(memo: Memo, searchText: String) {
+        let titleAttributedString = NSMutableAttributedString(string: memo.title)
+        let contentAttributedString = NSMutableAttributedString(string: memo.content ?? "")
+        
+        titleAttributedString.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (memo.title as NSString).range(of: searchText))
+        contentAttributedString.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: ((memo.content ?? "") as NSString).range(of: searchText))
+        titleLabel.attributedText = titleAttributedString
+        contentLabel.attributedText = contentAttributedString
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

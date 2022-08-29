@@ -77,6 +77,8 @@ class MainViewController: UIViewController {
     }
     
     func tableViewConfig() {
+        //memoTableView.estimatedRowHeight = 50
+        memoTableView.rowHeight = UITableView.automaticDimension
         memoTableView.delegate = self
         memoTableView.dataSource = self
         connectMemoCell()
@@ -110,6 +112,8 @@ class MainViewController: UIViewController {
         memoList = MemoRealmManager.shared.loadDataWithFileter(filter: .noPin)
         pinList = MemoRealmManager.shared.loadDataWithFileter(filter: .isPin)
         setTitleMemoCount()
+        //print("기본 높이 \(memoTableView.rowHeight)")
+        //print("추측 높이 \(memoTableView.estimatedRowHeight)")
     }
 
     @IBAction func writeBarButtonItemClicked(_ sender: UIBarButtonItem) {
@@ -130,7 +134,7 @@ class MainViewController: UIViewController {
 
 // MARK: - TableView Delegate
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    
+        
     func numberOfSections(in tableView: UITableView) -> Int {
         return MemoSection.allCases.count
     }
@@ -141,25 +145,29 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         //pinList.count는 왜 Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value가 발생하지..
         //didSet에서 TableView를 리로드해주었었는데 이 부분에서 에러가 발생한것 같다. -> 정확하게 물어보기.
         
-        //return section == MemoSection.pin.rawValue ? pinList.count : memoList.count
         return section == MemoSection.pin.rawValue ? (pinList.count <= 5 ? pinList.count : 5) : memoList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Const.CustomCell.MemoTableViewCell, for: indexPath) as? MemoTableViewCell else { return UITableViewCell() }
         
+        //print("기본 높이 \(tableView.rowHeight)")
+        //print("추측 높이 \(tableView.estimatedRowHeight)")
+        
         let memo = indexPath.section == MemoSection.pin.rawValue ? pinList[indexPath.row] : memoList[indexPath.row]
         cell.configure(memo: memo)
-//        if indexPath.section == MemoSection.pin.rawValue && pinList.count > 0 {
-//            cell.configure(memo: memo)
-//        } else if indexPath.section == MemoSection.normal.rawValue && memoList.count > 0 {
-//            cell.configure(memo: memo)
-//        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(MemoTableHeight.content.rawValue)
+        //print("heightForRowAt 호출")
+        //return CGFloat(MemoTableHeight.content.rawValue)
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        //print("estimatedHeightForRowAt 호출")
+        return 200
     }
     
     //커스텀 섹션 추가후 서치바가 처음 앱을 실행시 나타나지 않다가 스크롤시 나타나는 현상이 생김
@@ -174,7 +182,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         if section == MemoSection.pin.rawValue {
             return CGFloat(pinList.count != 0 ? MemoTableHeight.header.rawValue : MemoTableHeight.zero.rawValue)
         } else {
